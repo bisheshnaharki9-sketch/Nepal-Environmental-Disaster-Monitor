@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nepal Monitor</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bar">
+  <span class="brand">NEPAL MONITOR</span>
+  <span class="sub">environmental &amp; hazard watch</span>
+
+  <div class="ticker">
+    <div class="stat-mini">
+      <span class="k">quakes</span>
+      <span class="v eq" id="t-eq">0</span>
+    </div>
+    <div class="stat-mini">
+      <span class="k">highest AQI</span>
+      <span class="v air" id="t-aqi">&mdash;</span>
+    </div>
+    <div class="stat-mini">
+      <span class="k">total</span>
+      <span class="v" id="t-total">0</span>
+    </div>
+  </div>
+
+  <span class="status" id="status">connecting</span>
+  <time class="clock" id="clock">--:--:--</time>
+</header>
+
+<main class="grid">
+  <div id="map"></div>
+
+  <aside class="side">
+    <section class="card">
+      <h2>Live incidents</h2>
+      <ul class="feed" id="feed">
+        <li class="muted">loading...</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Legend</h2>
+      <ul class="legend legend-aqi">
+        <li><span class="sw" style="background:#00e400"></span>Good (0-50)</li>
+        <li><span class="sw" style="background:#ffff00"></span>Moderate (51-100)</li>
+        <li><span class="sw" style="background:#ff7e00"></span>Sensitive (101-150)</li>
+        <li><span class="sw" style="background:#ff0000"></span>Unhealthy (151-200)</li>
+        <li><span class="sw" style="background:#8f3f97"></span>Very unhealthy (201-300)</li>
+        <li><span class="sw" style="background:#7e0023"></span>Hazardous (300+)</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Counts</h2>
+      <dl class="stats">
+        <div><dt>Earthquakes</dt><dd id="c-eq">0</dd></div>
+        <div><dt>Air stations</dt><dd id="c-air">0</dd></div>
+        <div><dt>Weather</dt><dd id="c-wx">0</dd></div>
+        <div><dt>Rivers</dt><dd id="c-flood">0</dd></div>
+      </dl>
+    </section>
+
+    <section class="card src">
+      <h2>Sources</h2>
+      <p>USGS &middot; Open-Meteo &middot; GloFAS</p>
+      <p class="small">Auto-refresh every 60s</p>
+    </section>
+  </aside>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
