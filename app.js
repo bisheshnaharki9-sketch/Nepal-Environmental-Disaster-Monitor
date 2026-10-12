@@ -1,3 +1,8 @@
+/* Nepal Monitor - dashboard */
+if ('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
+
 /* Nepal Monitor — fetch incidents from the local aggregator,
    plot them on the map, populate the alert feed. */
 
@@ -44,10 +49,22 @@ function aqiColor(aqi) {
   return '#7e0023';
 }
 
+function eqColor(mag) {
+  if (mag < 3.0) return '#4dd0a0';
+  if (mag < 4.0) return '#f2d84d';
+  if (mag < 5.0) return '#ffa04d';
+  if (mag < 6.0) return '#ff5540';
+  if (mag < 7.0) return '#ff2020';
+  return '#7e0023';
+}
+
 function colorFor(inc) {
   if (inc.type === 'air') {
     const aqi = parseInt((inc.title.match(/AQI (\d+)/) || [])[1] || '0', 10);
     return aqiColor(aqi);
+  }
+  if (inc.type === 'earthquake') {
+    return eqColor(inc.severity);
   }
   return COLORS[inc.type] || '#8899aa';
 }
@@ -211,6 +228,37 @@ function setStatus(text, cls) {
   el.className = 'status ' + (cls || '');
 }
 
+const notified = new Set();
+
+function showBrowserAlerts(incidents) {
+  if (!('Notification' in window)) return;
+  if (Notification.permission !== 'granted') return;
+
+  for (const inc of incidents) {
+    const id = inc.type + '_' + inc.lat.toFixed(2) + '_' + inc.lon.toFixed(2) +
+               '_' + Math.floor(inc.time / 3600);
+    if (notified.has(id)) continue;
+
+    let title = null, body = null;
+
+    if (inc.type === 'earthquake' && inc.severity >= 4.5) {
+      title = 'Earthquake M' + inc.severity.toFixed(1);
+      body = inc.title + ' - ' + inc.detail;
+    } else if (inc.type === 'air' && inc.aqi > 150) {
+      title = 'Unhealthy air quality';
+      body = inc.title;
+    } else if (inc.type === 'flood' && inc.severity > 8) {
+      title = 'Flood risk';
+      body = inc.title + ' - ' + inc.detail;
+    }
+
+    if (title) {
+      new Notification(title, { body: body });
+      notified.add(id);
+    }
+  }
+}
+
 async function pull() {
   try {
     const r = await fetch(API);
@@ -221,6 +269,7 @@ async function pull() {
     plot(incidents);
     renderFeed(incidents);
     setCounts(incidents);
+    showBrowserAlerts(incidents);
     updateTicker(incidents);
 
     const t = new Date(data.generated);
