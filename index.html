@@ -9,6 +9,28 @@
 </head>
 <body>
 
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-brand">NEPAL MONITOR</div>
+    <div class="login-sub">restricted access</div>
+
+    <label>
+      <span>operator</span>
+      <input id="login-user" type="text" autocomplete="off" spellcheck="false">
+    </label>
+
+    <label>
+      <span>passphrase</span>
+      <input id="login-pass" type="password" autocomplete="off">
+    </label>
+
+    <button id="login-btn">SIGN IN</button>
+    <div id="login-err" class="login-err"></div>
+  </div>
+</div>
+
+
+
 <header class="bar">
   <span class="brand">NEPAL MONITOR</span>
   <span class="sub">environmental &amp; hazard watch</span>
@@ -74,6 +96,7 @@
 </main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="login.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

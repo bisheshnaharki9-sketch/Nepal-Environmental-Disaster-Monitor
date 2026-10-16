@@ -185,7 +185,8 @@ def weather():
 
 def flood_forecast():
     out = []
-    for name, lat, lon in AQI_CITIES[:3]:
+    for lat, lon in GRID[:3]:
+        name = nearest_district(lat, lon)
         try:
             url = ('https://flood-api.open-meteo.com/v1/flood'
                    f'?latitude={lat}&longitude={lon}'
@@ -195,14 +196,16 @@ def flood_forecast():
             vals = daily.get('river_discharge', []) or []
             mx = daily.get('river_discharge_max', []) or []
             if vals:
+                river = vals[0] or 0
+                peak = (mx[0] if mx else 0) or 0
                 out.append({
                     'type': 'flood',
                     'lat': lat,
                     'lon': lon,
-                    'title': f"{name} - river {vals[0]:.1f} m3/s",
-                    'severity': min(10, (vals[0] or 0) / 200),
+                    'title': f"{name} - river {river:.1f} m3/s",
+                    'severity': min(10, river / 200),
                     'time': int(datetime.now(timezone.utc).timestamp()),
-                    'detail': f"3-day peak {(mx[0] if mx else 0):.1f} m3/s",
+                    'detail': f"3-day peak {peak:.1f} m3/s",
                     'source': 'GloFAS',
                 })
         except Exception as e:

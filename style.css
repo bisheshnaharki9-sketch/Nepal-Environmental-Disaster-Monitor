@@ -435,3 +435,112 @@ body {
   height: 10px;
   border-radius: 2px;
 }
+
+/* ============== LOGIN SCREEN ============== */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(ellipse at center, #0a0e14 0%, #04070c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .25s ease;
+}
+#login-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(91,155,213,.03) 0px,
+    rgba(91,155,213,.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+.login-box {
+  position: relative;
+  width: 340px;
+  padding: 2rem 1.8rem;
+  background: rgba(14,19,26,.9);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.8);
+  backdrop-filter: blur(12px);
+}
+.login-brand {
+  font-size: .95rem;
+  letter-spacing: .38em;
+  color: var(--bright);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: .25rem;
+}
+.login-sub {
+  font-size: .58rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.login-box label {
+  display: block;
+  margin-bottom: 1rem;
+}
+.login-box label span {
+  display: block;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: .35rem;
+}
+.login-box input {
+  width: 100%;
+  padding: .55rem .7rem;
+  background: #060a07;
+  color: var(--bright);
+  border: 1px solid var(--line-2);
+  font: 13px "IBM Plex Mono","Courier New",monospace;
+  letter-spacing: .06em;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.login-box input:focus {
+  border-color: #3d6a8a;
+  box-shadow: 0 0 0 2px rgba(91,155,213,.12);
+}
+#login-btn {
+  width: 100%;
+  margin-top: .8rem;
+  padding: .6rem;
+  background: #131923;
+  color: var(--bright);
+  border: 1px solid var(--line-2);
+  font: 11px "IBM Plex Mono","Courier New",monospace;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+#login-btn:hover {
+  background: #1a2230;
+  border-color: #3d6a8a;
+}
+#login-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.login-err {
+  margin-top: .8rem;
+  text-align: center;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  color: var(--eq);
+  min-height: 1rem;
+}
