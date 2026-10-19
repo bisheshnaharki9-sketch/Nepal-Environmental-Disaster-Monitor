@@ -2,6 +2,10 @@
 
 Real-time environmental and hazard dashboard for Nepal.
 
+## Crediantials 
+- Username = operator
+- Passwd = nepal2026
+
 ## What it tracks:
 - Earthquakes (USGS) — colored and sized by magnitude
 - Air quality across 30+ grid points (Open-Meteo) — EPA AQI color scale
@@ -26,4 +30,6 @@ Python 3, Leaflet, vanilla JavaScript. No frameworks.
 ## Data sources:
 All free and keyless: USGS, Open-Meteo, GloFAS.
 Added a login page 
-okay so changed in read.me so decided to add an amazing thing and added in index.html 
+okay so changed in read.me 
+so decided to add an amazing thing and added in index.html
+added some cool shi in index.html loin.js and app.js
