@@ -544,3 +544,43 @@ body {
   color: var(--eq);
   min-height: 1rem;
 }
+
+/* City Quick Nav */
+#city-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(14, 19, 26, 0.85);
+  border: 1px solid var(--line-2);
+  padding: 0.8rem;
+  border-radius: 3px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+#city-panel h2 {
+  font-size: 0.55rem;
+  color: var(--dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+#city-panel button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  padding: 0.3rem 0.6rem;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+#city-panel button:hover {
+  background: #1a2230;
+  color: var(--bright);
+  border-color: #3d6a8a;
+}

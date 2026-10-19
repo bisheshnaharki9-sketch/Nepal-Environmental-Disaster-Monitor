@@ -50,12 +50,21 @@
     </div>
   </div>
 
+  <button id="sitrep-btn" style="background:none; border:1px solid var(--line-2); color:var(--ink-2); font-family:inherit; font-size:.65rem; letter-spacing:.15em; padding:.3rem .6rem; cursor:pointer; margin-right:1rem;">GENERATE SITREP</button>
   <span class="status" id="status">connecting</span>
   <time class="clock" id="clock">--:--:--</time>
 </header>
 
 <main class="grid">
   <div id="map"></div>
+  <div id="city-panel">
+    <h2>Quick Nav</h2>
+    <button data-lat="27.72" data-lon="85.32">Kathmandu</button>
+    <button data-lat="28.21" data-lon="83.99">Pokhara</button>
+    <button data-lat="26.45" data-lon="87.27">Biratnagar</button>
+    <button data-lat="27.01" data-lon="84.88">Birgunj</button>
+    <button data-lat="28.05" data-lon="81.62">Nepalgunj</button>
+  </div>
 
   <aside class="side">
     <section class="card">
@@ -96,7 +105,15 @@
 </main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
 <script src="login.js"></script>
 <script src="app.js"></script>
+<div id="sitrep-modal" style="display:none; position:fixed; inset:0; z-index:100000; background:rgba(4,7,12,.9); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--line-2); padding:2rem; max-width:600px; width:90%; font-family:inherit; box-shadow:0 20px 60px rgba(0,0,0,.8);">
+    <h2 style="color:var(--bright); letter-spacing:.3em; margin-bottom:1rem; font-size:.8rem;">INTELLIGENCE REPORT</h2>
+    <div id="sitrep-content" style="color:var(--ink-2); font-size:.85rem; line-height:1.6; min-height:100px; white-space:pre-wrap;"></div>
+    <button onclick="document.getElementById('sitrep-modal').style.display='none'" style="margin-top:1.5rem; background:#131923; color:var(--bright); border:1px solid var(--line-2); padding:.5rem 1rem; font-family:inherit; letter-spacing:.2em; cursor:pointer;">CLOSE</button>
+  </div>
+</div>
 </body>
 </html>

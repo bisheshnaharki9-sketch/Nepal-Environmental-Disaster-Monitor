@@ -385,6 +385,15 @@ async function pull() {
   showBrowserAlerts(incidents);
 
   setStatus('live - ' + incidents.length + ' incidents', 'live');
+  
+  // flash the clock to show it updated
+  const clockEl = document.getElementById('clock');
+  clockEl.style.color = 'var(--bright)';
+  clockEl.style.textShadow = '0 0 10px var(--air-ok)';
+  setTimeout(() => {
+    clockEl.style.color = '';
+    clockEl.style.textShadow = '';
+  }, 800);
   document.getElementById('clock').textContent =
     new Date().toLocaleDateString('en-GB', { ...NPT, day:'2-digit', month:'short' })
     + ' - ' + new Date().toLocaleTimeString('en-GB', NPT) + ' NPT';
@@ -399,3 +408,12 @@ setInterval(() => {
     new Date().toLocaleDateString('en-GB', { ...NPT, day:'2-digit', month:'short' })
     + ' - ' + new Date().toLocaleTimeString('en-GB', NPT) + ' NPT';
 }, 1000);
+
+// City Quick-Nav logic
+document.querySelectorAll('#city-panel button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lat = parseFloat(btn.getAttribute('data-lat'));
+    const lon = parseFloat(btn.getAttribute('data-lon'));
+    map.flyTo([lat, lon], 10, { duration: 1.5 });
+  });
+});
